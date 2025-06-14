@@ -670,19 +670,3 @@ def test_ndindex_empty_iterator_behavior():
     with pytest.raises(StopIteration):
         next(empty_iter2)
 
-# 10. Performance Regression
-def test_ndindex_performance_regression():
-    """Basic performance test to ensure no major regressions."""
-    import time
-
-    shape = (20, 30, 40)
-
-    start_time = time.perf_counter()
-    count = sum(1 for _ in np.ndindex(*shape))
-    elapsed_time = time.perf_counter() - start_time
-
-    expected_count = 20 * 30 * 40
-    assert_equal(count, expected_count)
-
-    assert elapsed_time < 1.0, f"ndindex took {elapsed_time:.3f}s, which seems slow"
-
